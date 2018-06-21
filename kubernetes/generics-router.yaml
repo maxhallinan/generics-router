@@ -1,19 +1,47 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: generics-router
-  annotations:
-    # kubernetes.io/ingress.class: nginx
-    # nginx.ingress.kubernetes.io/default-backend: default-http-backend
-    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    # nginx.ingress.kubernetes.io/rewrite-target: /
-    # nginx.org/websocket-services: "generics-travel"
-spec:
-  rules:
-  - host: generics.maxhallinan.com
-    http:
-      paths:
-      - path: /travel
-        backend:
-          serviceName: generics-travel
-          servicePort: 80
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: generics-router
+#   annotations:
+#     # kubernetes.io/ingress.class: nginx
+#     # nginx.ingress.kubernetes.io/default-backend: default-http-backend
+#     # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+#     # nginx.ingress.kubernetes.io/rewrite-target: /
+#     # nginx.org/websocket-services: "generics-travel"
+# spec:
+#   rules:
+#   - host: generics.maxhallinan.com
+#     http:
+#       paths:
+#       - path: /travel
+#         backend:
+#           serviceName: generics-travel
+#           servicePort: 80
+#     tls:
+#     - hosts:
+#       - generics.maxhallinan.com
+#       secretName: nlb-tls-cert
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: generics-router
+    annotations:
+      # kubernetes.io/ingress.class: nginx
+      # nginx.ingress.kubernetes.io/default-backend: default-http-backend
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      # nginx.ingress.kubernetes.io/rewrite-target: /
+  spec:
+    rules:
+    - host: generics.maxhallinan.com
+      http:
+        paths:
+        - path: /travel
+          backend:
+            serviceName: generics-travel
+            servicePort: 80
+      tls:
+      - hosts:
+        - generics.maxhallinan.com
+        secretName: generics-tls-cert

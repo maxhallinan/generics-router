@@ -1,0 +1,25 @@
+version: '3'
+services:
+  generics_router:
+    image: nginx
+    links:
+      - generics_travel
+    ports:
+      - "3000:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+  generics_travel:
+    expose: 
+      - 80 
+    environment:
+      - MTA_FEED_API_KEY
+      - MTA_FEED_IDS
+      - MTA_FEED_REFRESH_INTERVAL
+      - MTA_FEED_ROOT_URL
+      - RANGE_X_START
+      - RANGE_X_STOP
+      - RANGE_Y_START
+      - RANGE_Y_STOP
+      - WS_HOST
+      - WS_PORT=80
+    image: maxhallinan/generics-travel
